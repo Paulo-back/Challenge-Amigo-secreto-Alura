@@ -4,7 +4,14 @@ let listaAmigos = [];
 function adicionarAmigo(){
     let amigo = document.querySelector('input').value;
     if(!amigo){
-        alert('valor vazio');
+        Swal.fire({
+            title: "Erro ao inserir nome!",
+            text: "Por favor insira um nome válido.",
+            icon: "error",
+            confirmButtonText: "OK",
+            timer: 3000
+          });
+          
 
     }else{
         listaAmigos.push(amigo);
@@ -35,14 +42,17 @@ function exibeSorteado(tag,texto){
         campo.innerHTML = texto;
      }
 
+
 function sortearAmigo(){
-        //Colocar um alert & if para senao tiver amigos adicionados errado
-        let amigoSorteado = listaAmigos[Math.floor(Math.random()* listaAmigos.length)];
+    let amigoSorteado = listaAmigos[Math.floor(Math.random()* listaAmigos.length)];
     console.log(amigoSorteado);
-    exibeSorteado('#resultado',amigoSorteado);
+    exibeSorteado('#resultado',`O amigo sorteado é: ${amigoSorteado} `);
      document.getElementById('sortearAmigo').setAttribute('disabled', true);
 }
 function limparCampo(){
     amigo = document.querySelector('input');
     amigo.value = '';
+}
+function repetir(){
+    
 }

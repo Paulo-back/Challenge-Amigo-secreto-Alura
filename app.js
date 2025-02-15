@@ -1,6 +1,5 @@
 let listaAmigos = [];
 
-
 function adicionarAmigo(){
     let amigo = document.querySelector('input').value;
     if(!amigo){
@@ -11,22 +10,34 @@ function adicionarAmigo(){
             confirmButtonText: "OK",
             timer: 3000
           });
-          
+          return;
 
-    }else{
-        listaAmigos.push(amigo);
-
-        console.log(listaAmigos);
-        for(let i = 0;i<listaAmigos.length;i++){
-            exibirAmigos('#listaAmigos',`${listaAmigos}`);
-            document.getElementById('sortearAmigo').disabled = false;
-
-
+    }
+    for(i=0;i<listaAmigos.length;i++){
+        if(amigo == listaAmigos[i]){
+            Swal.fire({
+                title: "Nome já inserido!",
+                text: "Se for outra pessoa por favor colocar o sobrenome",
+                icon: "error",
+                confirmButtonText: "OK",
+                timer: 3200
+              });
+              return;
         }
-        limparCampo();
+    }
+
+    listaAmigos.push(amigo);
+    for(let i = 0;i<listaAmigos.length;i++){
+        exibirAmigos('#listaAmigos',`${listaAmigos}`);
+        }
+        if(listaAmigos.length>1){
+            document.getElementById('sortearAmigo').disabled = false;
+        }
+    
+    limparCampo();
     }
     
-}
+
 function exibirAmigos() {
     let listaHTML = document.querySelector('#listaAmigos');
     listaHTML.innerHTML = "";
@@ -45,14 +56,27 @@ function exibeSorteado(tag,texto){
 
 function sortearAmigo(){
     let amigoSorteado = listaAmigos[Math.floor(Math.random()* listaAmigos.length)];
-    console.log(amigoSorteado);
+    //testes
+    // console.log(amigoSorteado);
+    // console.log(listaAmigos);
     exibeSorteado('#resultado',`O amigo sorteado é: ${amigoSorteado} `);
      document.getElementById('sortearAmigo').setAttribute('disabled', true);
+     document.getElementById('novoSorteio').disabled = false;
+     document.getElementById('button-add').setAttribute('disabled', true);
+     document.getElementById('amigo').setAttribute('disabled', true);
 }
 function limparCampo(){
     amigo = document.querySelector('input');
     amigo.value = '';
 }
-function repetir(){
-    
+function novoSorteio(){
+    let listaHTML = document.querySelector('#listaAmigos');
+    listaHTML.innerHTML = "";
+    exibeSorteado('#resultado','');
+    limparCampo();
+    document.getElementById('button-add').disabled = false;
+    document.getElementById('amigo').disabled = false;
+    document.getElementById('novoSorteio').setAttribute('disabled', true);
+    listaAmigos = [];
+
 }

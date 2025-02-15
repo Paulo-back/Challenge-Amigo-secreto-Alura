@@ -88,8 +88,10 @@ body {
 }
 
 .button-container {
-    width: 300px;
-    justify-content: center;
+    /* width: 300px;
+    justify-content: center; */
+    display: flex;
+    gap: 2em;
 }
 
 /* Estilos de entrada de texto */
@@ -122,8 +124,13 @@ button {
     border-radius: 0 25px 25px 0;
 }
 
+
 .button-add:hover {
     background-color: var(--color-button);
+    
+}
+.button-add:disabled {
+    background-color: gray;
     
 }
 
